@@ -243,3 +243,42 @@ return ( <div className="min-h-screen bg-black text-white overflow-hidden"> <div
 npm install @fal-ai/serverless-client
 .env.local
 FAL_KEY=tu_api_key
+import * as fal from "@fal-ai/serverless-client";
+
+fal.config({
+  credentials: process.env.FAL_KEY,
+});
+
+export async function POST(req) {
+  const body = await req.json();
+
+  const result = await fal.subscribe(
+    "fal-ai/flux/dev",
+    {
+      input: {
+        prompt: body.prompt,
+      },
+    }
+  );
+
+  return Response.json({
+    image: result.data.images[0].url,
+  });
+}
+const response = await fetch("/api/generate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    prompt: generatedPrompt,
+  }),
+});
+
+const data = await response.json();
+
+setGeneratedImage(data.image);
+<img
+  src={generatedImage}
+  className="w-full h-full object-cover"
+/>
