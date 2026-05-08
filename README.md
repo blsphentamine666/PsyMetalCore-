@@ -240,3 +240,6 @@ return ( <div className="min-h-screen bg-black text-white overflow-hidden"> <div
 </div>
 
 ); }
+npm install @fal-ai/serverless-client
+.env.local
+FAL_KEY=tu_api_key
