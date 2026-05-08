@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>KOMBAT FLESH | Tattoo Forge AI - Meatcore Giger Engine</title>
+    <title>MEATCORE // GIGER FORGE | TATTOO AI + TRAINING PIT</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rubik+Glitch&family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -11,35 +12,40 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #0a0202 0%, #1a0303 100%);
+            background: #0a0101;
             font-family: 'Orbitron', 'Special Elite', monospace;
-            color: #f0ddc0;
-            scroll-behavior: smooth;
+            color: #ecc9b0;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Blood Drip Canvas Effect */
-        .blood-drip {
+        /* ---- TEXTURAS GIGER / ROJAS / CARNE ---- */
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: repeating-linear-gradient(45deg, rgba(120, 20, 10, 0.15) 0px, rgba(120, 20, 10, 0.15) 2px, transparent 2px, transparent 8px),
+                              repeating-linear-gradient(135deg, rgba(80, 8, 8, 0.2) 0px, rgba(80, 8, 8, 0.2) 1px, transparent 1px, transparent 12px),
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.2"><path fill="%238b0000" d="M20,30 L35,15 L50,28 L65,12 L80,25 L75,45 L85,60 L70,78 L50,72 L30,82 L15,65 L20,45 Z" /></svg>');
+            background-repeat: repeat, repeat, repeat;
+            background-size: auto, auto, 45px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* venas biomecánicas */
+        .veins {
+            position: fixed;
             width: 100%;
             height: 100%;
+            background: radial-gradient(circle at 30% 20%, transparent 60%, #6a0e0e30 90%);
             pointer-events: none;
-            z-index: 2;
-            opacity: 0.15;
-            background-image: repeating-linear-gradient(0deg, rgba(180, 20, 20, 0.4) 0px, rgba(180, 20, 20, 0) 2px, transparent 8px);
-        }
-
-        /* Giger / Meatcore ornament */
-        .giger-border {
-            border: 1px solid #8b0000;
-            box-shadow: 0 0 15px rgba(180, 0, 0, 0.5), inset 0 0 10px rgba(180, 0, 0, 0.3);
-            background: rgba(10, 2, 2, 0.75);
-            backdrop-filter: blur(3px);
+            z-index: 1;
         }
 
         .container {
@@ -47,427 +53,416 @@
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            z-index: 5;
+            z-index: 10;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 3px solid #a1220a;
-            padding-bottom: 20px;
-            text-shadow: 0 0 5px #ff3300, 0 0 10px #8b0000;
+        /* estilo cajas metálico sangriento */
+        .giger-card {
+            background: rgba(12, 2, 2, 0.85);
+            backdrop-filter: blur(6px);
+            border: 1px solid #b32b1a;
+            border-radius: 32px;
+            padding: 22px;
+            margin-bottom: 28px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(180, 20, 0, 0.3);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        h1 {
+        .giger-card:hover {
+            border-color: #ec4a2e;
+            box-shadow: 0 0 15px #b12b1a;
+        }
+
+        h2 {
             font-family: 'Rubik Glitch', cursive;
-            font-size: 3.5rem;
-            letter-spacing: 5px;
-            background: linear-gradient(135deg, #bc2f1a, #5a0a0a);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(2px 2px 4px black);
-        }
-
-        .sub {
-            font-size: 0.9rem;
-            color: #e69a6f;
-            font-family: 'Special Elite';
-        }
-
-        /* layout grid */
-        .grid-2col {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 900px) {
-            .grid-2col {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* cards estilo meatpack */
-        .card {
-            background: #110202d9;
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-left: 6px solid #c0392b;
-            border-right: 2px solid #4a0f0f;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 75, 30, 0.2);
-            transition: all 0.2s;
-        }
-
-        .card h2 {
-            font-size: 1.7rem;
+            font-size: 1.9rem;
+            border-left: 7px solid #c02a18;
+            padding-left: 18px;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 5px solid #b12a1a;
-            padding-left: 15px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #3a0303;
+            letter-spacing: 1px;
         }
 
-        .token-input {
-            background: #1e0a0a;
-            border: 1px solid #a12020;
-            padding: 12px;
-            border-radius: 40px;
-            width: 100%;
-            font-family: monospace;
-            color: #fcb69f;
-            margin: 15px 0;
-        }
-
-        button, .btn-gen {
-            background: #631010;
+        button, .btn-style {
+            background: #2d0d0d;
             border: none;
-            padding: 14px 22px;
             font-family: 'Orbitron', monospace;
             font-weight: bold;
-            color: #ffcfb0;
-            border-radius: 60px;
+            color: #ffcdb0;
+            border-radius: 40px;
+            padding: 12px 24px;
             cursor: pointer;
-            transition: 0.2s;
-            letter-spacing: 2px;
-            box-shadow: 0 5px 0 #2c0303;
-            margin-top: 10px;
+            transition: all 0.15s linear;
+            box-shadow: 0 4px 0 #4a0c0c;
+            margin: 8px 6px 0 0;
             font-size: 0.9rem;
         }
 
         button:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 0 #2c0303;
+            box-shadow: 0 1px 0 #4a0c0c;
         }
 
         button:hover {
-            background: #971f1f;
+            background: #a82414;
             color: white;
-            text-shadow: 0 0 5px red;
-        }
-
-        .style-selector {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 20px 0;
+            text-shadow: 0 0 4px red;
+            letter-spacing: 1px;
         }
 
         .style-btn {
-            background: #2c0f0f;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            transition: all 0.1s;
-            border: 1px solid #b53b2a;
+            background: #1d0404;
+            border: 1px solid #aa3a28;
+            padding: 8px 20px;
+            border-radius: 60px;
         }
 
-        .style-btn.active {
-            background: #b32d1a;
-            box-shadow: 0 0 12px #ff4422;
-            border-color: #ff9f6e;
+        .active-style {
+            background: #b12a1a;
+            box-shadow: 0 0 12px #ff5722;
+            border-color: #ffa066;
+        }
+
+        input, textarea {
+            background: #170202;
+            border: 1px solid #b34e3a;
+            border-radius: 60px;
+            padding: 12px 18px;
+            width: 100%;
+            color: #ffbc8c;
+            font-family: monospace;
+            margin: 12px 0;
+        }
+
+        .token-area {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 28px;
+        }
+
+        @media (max-width: 880px) {
+            .grid-2 { grid-template-columns: 1fr; }
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 18px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .gallery-item {
-            background: #0d0101;
-            border-radius: 20px;
+            background: #080000;
+            border-radius: 24px;
             overflow: hidden;
-            border: 1px solid #9e2d1c;
-            transition: transform 0.2s;
+            border: 1px solid #bc3925;
+            transition: 0.2s;
         }
 
         .gallery-item img {
             width: 100%;
-            aspect-ratio: 1/1;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
             display: block;
-        }
-
-        .mockup-opt {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 15px 0;
-            background: #2c0707;
-            padding: 8px 15px;
-            border-radius: 100px;
-        }
-
-        .training-preview {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 15px 0;
         }
 
         .train-thumb {
             width: 70px;
             height: 70px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid #b3311f;
+            border-radius: 18px;
+            border: 2px solid #c5422c;
+            margin: 5px;
         }
 
         .loader {
-            border: 3px solid #4a1a1a;
-            border-top: 3px solid #e0582e;
+            width: 45px;
+            height: 45px;
+            border: 4px solid #411010;
+            border-top: 4px solid #e64b2e;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
+            animation: spin 0.9s linear infinite;
+            margin: 12px auto;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .status-text {
-            font-size: 0.8rem;
-            font-family: monospace;
-            color: #ff9066;
+        .mockup-check {
+            background: #2d0e0a;
+            border-radius: 40px;
+            padding: 10px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
         }
 
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            border-top: 1px dashed #a13a2a;
+            margin-top: 50px;
+            padding: 22px;
+            border-top: 1px solid #ab2c1a;
             font-size: 0.7rem;
         }
 
-        i.fa, i.fas {
+        .status-text {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #e68a6a;
+        }
+
+        i {
             margin-right: 8px;
         }
     </style>
 </head>
 <body>
-<div class="blood-drip"></div>
+<div class="veins"></div>
 <div class="container">
-    <header>
-        <h1><i class="fas fa-skull"></i> FLESH KOMBAT <i class="fas fa-dragon"></i></h1>
-        <div class="sub">⚡ GIGER // MEATCORE // MORTAL FLASH ⚡</div>
-        <div class="sub">[ IA INFERNO TATTOO ENGINE + TRAINING PIT ]</div>
-    </header>
+    <div style="text-align:center; margin-bottom: 25px;">
+        <h1 style="font-family: 'Rubik Glitch'; font-size: 3.7rem; letter-spacing: 5px; background: linear-gradient(145deg, #bc3824, #560d0d); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 12px #8a1c0c);"><i class="fas fa-skull"></i> KOMBAT NEXUS <i class="fas fa-dragon"></i></h1>
+        <div class="status-text">⚡ GIGER // MEATCORE // FLESH ALCHEMY ⚡ [ TATTOO INFERNO ENGINE + STYLE TRAINING ]</div>
+    </div>
 
-    <div class="grid-2col">
-        <!-- COLUMNA IZQUIERDA: GENERACIÓN + ESTILOS -->
+    <div class="grid-2">
+        <!-- COLUMNA IZQ: GENERACIÓN + ENTRENAMIENTO -->
         <div>
-            <div class="card">
+            <div class="giger-card">
                 <h2><i class="fas fa-fire"></i> BLOOD GENERATOR</h2>
-                <div>
-                    <label>🔑 HUGGING FACE TOKEN (requerido para IA real)</label>
-                    <input type="text" id="hfToken" class="token-input" placeholder="hf_xxxxxxxxxxxxxxxxxxxx" value="">
-                    <div class="status-text" id="tokenStatus">⚡ Usa tu propio token de Hugging Face (gratis) o demo limitada</div>
+                <div class="token-area">
+                    <input type="text" id="hfToken" placeholder="🔑 hf_xxxxxxxx... (token Hugging Face)" style="flex:2">
+                    <button id="saveTokenBtn" style="padding:10px 20px;"><i class="fas fa-key"></i> Guardar</button>
                 </div>
-
-                <div class="style-selector" id="styleSelector">
-                    <button data-style="anime" class="style-btn active"><i class="fas fa-draw-polygon"></i> ANIME</button>
+                <div id="tokenMsg" class="status-text"></div>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 10px;">
+                    <button data-style="anime" class="style-btn active-style"><i class="fas fa-draw-polygon"></i> ANIME</button>
                     <button data-style="tribal" class="style-btn"><i class="fas fa-dragon"></i> TRIBAL</button>
                     <button data-style="gore" class="style-btn"><i class="fas fa-biohazard"></i> GORE</button>
                     <button data-style="cybersigil" class="style-btn"><i class="fas fa-microchip"></i> CYBER SIGILS</button>
                     <button data-style="neotribal" class="style-btn"><i class="fas fa-waveform"></i> NEO TRIBAL</button>
                 </div>
-
-                <div class="mockup-opt">
-                    <input type="checkbox" id="mockupToggle"> 
-                    <label for="mockupToggle"><i class="fas fa-tshirt"></i> MOCKUP MODE (sobrepiel / brazo)</label>
+                
+                <div class="mockup-check">
+                    <input type="checkbox" id="mockupMode"> 
+                    <label><i class="fas fa-tshirt"></i> MOCKUP TATTOO (efecto brazo/piel biomecánica)</label>
                 </div>
-
-                <button id="generateBtn" class="btn-gen"><i class="fas fa-skull-crossbones"></i> GENERATE TATTOO FLASH</button>
-                <div id="genLoader" style="display: none;"><div class="loader"></div><div class="status-text">Invoking Giger's spirit... IA generando arte carnal...</div></div>
-                <div id="genError" class="status-text" style="color:#ff7766;"></div>
+                
+                <button id="generateImageBtn" style="width:100%; margin-top: 12px;"><i class="fas fa-skull-crossbones"></i> INVOCAR FLASH / MOCKUP</button>
+                <div id="genLoader" style="display: none;"><div class="loader"></div><div class="status-text">🩸 Giger está tejiendo carne y tinta...</div></div>
+                <div id="genError" class="status-text" style="color:#ff7568;"></div>
             </div>
 
-            <div class="card">
-                <h2><i class="fas fa-chalkboard-user"></i> TRAINING PIT (Simulación Modelo Propio)</h2>
-                <p style="font-size:0.8rem">➤ Sube entre 3-8 imágenes de tus diseños flash / tatuajes favoritos. ¡Entrenamos un "estilo carne" único! (Simulación avanzada: inyecta tu esencia en el prompt)</p>
-                <input type="file" id="trainImagesUpload" multiple accept="image/jpeg,image/png,image/jpg">
-                <div id="trainPreview" class="training-preview"></div>
-                <input type="text" id="styleName" placeholder="Nombre de tu estilo (ej: 'CYBER RITUAL')" style="width:100%; padding:10px; background:#150404; border:1px solid #b13b28; color:#f2bc94; border-radius:30px;">
-                <button id="trainModelBtn"><i class="fas fa-brain"></i> ENTRENAR MODELO PERSONALIZADO</button>
-                <div id="trainStatus" class="status-text"></div>
-                <div id="activeStyleBadge" style="margin-top:10px; background:#3d1212; border-radius:12px; padding:8px; display:none;"></div>
+            <div class="giger-card">
+                <h2><i class="fas fa-chalkboard-user"></i> ENTRENA TU PROPIO ESTILO</h2>
+                <p style="font-size:0.75rem;"><i class="fas fa-info-circle"></i> Sube entre 3 y 8 diseños Flash / Tatuajes tuyos. El sistema extraerá la paleta y esencia para personalizar prompts futuros.</p>
+                <input type="file" id="trainInput" multiple accept="image/jpeg,image/png,image/jpg">
+                <div id="trainPreviewArea" class="training-preview" style="display:flex; flex-wrap:wrap; gap:10px; margin:15px 0;"></div>
+                <input type="text" id="customStyleName" placeholder="Nombre de tu estilo (ej: RITUAL CARNE)">
+                <button id="trainStyleBtn"><i class="fas fa-brain"></i> ENTRENAR MODELO (inyección semántica)</button>
+                <div id="trainStatusDisplay" class="status-text"></div>
+                <div id="trainedBadge" style="background:#2f0b0b; border-radius:20px; padding:8px; margin-top:12px; display:none;"></div>
             </div>
         </div>
 
-        <!-- COLUMNA DERECHA: GALERIA + RESULTADOS -->
+        <!-- COLUMNA DER: GALERIA Y PROMPT DINÁMICO-->
         <div>
-            <div class="card">
-                <h2><i class="fas fa-images"></i> FLASH // MOCKUPS GENERADOS</h2>
-                <div id="galleryContainer" class="gallery">
-                    <div class="status-text" style="text-align:center;">⚔️ Las imágenes nacidas del horno aparecerán aquí ⚔️</div>
+            <div class="giger-card">
+                <h2><i class="fas fa-images"></i> FLASH // MOCKUPS SANGRIENTOS</h2>
+                <div id="gallery" class="gallery">
+                    <div class="status-text" style="text-align:center;">⚔️ Las invocaciones aparecerán aquí ⚔️</div>
                 </div>
-                <button id="clearGallery" style="margin-top:12px; background:#2c0808;"><i class="fas fa-trash-alt"></i> LIMPIAR GALERÍA SANGRIENTA</button>
+                <button id="clearGalleryBtn" style="margin-top:16px;"><i class="fas fa-trash-alt"></i> VACIAR CARNERO</button>
             </div>
-            <div class="card">
-                <h2><i class="fas fa-scroll"></i> NECRO-NOMICON PROMPT</h2>
-                <p style="margin-bottom:10px;">Estilo actual + influencia entrenada + estética Meatcore/Giger/Blood MK</p>
-                <div id="promptPreview" class="status-text" style="background:#2b0505; border-radius:14px; padding:12px; font-size:0.75rem;">⚡ Esperando invocación...</div>
+            <div class="giger-card">
+                <h2><i class="fas fa-scroll"></i> NECRO PROMPT ENGINE</h2>
+                <div id="promptPreviewLive" class="status-text" style="background:#200606; border-radius: 24px; padding: 16px; font-size:0.75rem; white-space: pre-wrap; word-break: break-word;">⚡ Esperando forja...</div>
+                <div class="status-text" style="margin-top: 10px;"><i class="fas fa-dice-d6"></i> El entrenamiento modifica el prompt con tu ADN visual</div>
             </div>
         </div>
     </div>
     <footer>
-        <i class="fas fa-biohazard"></i> AI Tattoo Forge — combinación de Stable Diffusion + Entrenamiento conceptual único. El "Entrenamiento" modifica el prompt con base a tus imágenes subidas (inyección semántica). Para verdadero fine-tune, necesitarías GPUs, pero aquí obtienes estilo híbrido personalizado.<br>
-        🔞 Estilo Mortal Kombat / Giger / Sangre | Necesitas token HF activo.
+        <i class="fas fa-cog"></i> INFERNO AI · Modelo: Stable Diffusion v2.1 · Entrenamiento conceptual (simulación con análisis de imagen) · Para usar IA real necesitas token HF gratis · Mockup overlays biomecánicos
     </footer>
 </div>
 
 <script>
-    // --------------------- CONFIGURACIÓN GLOBAL ---------------------
-    let selectedStyle = "anime";
+    // -------------------- ESTADO GLOBAL --------------------
+    let activeStyle = "anime";
     let trainedActive = false;
-    let trainedPromptModifier = "";
-    let trainedStyleName = "";
-    let uploadedImageData = []; // almacenar thumbnails para entrenamiento simulado pero también para "fingerprint" textual
+    let trainedPromptAddon = "";
+    let trainedName = "";
+    let uploadedImagesData = []; // almacena objetos {src, colorFeatures}
+    let hfToken = localStorage.getItem("hf_token") || "";
     
-    // Elementos DOM
-    const hfTokenInput = document.getElementById('hfToken');
-    const generateBtn = document.getElementById('generateBtn');
-    const genLoaderDiv = document.getElementById('genLoader');
-    const genErrorDiv = document.getElementById('genError');
-    const galleryContainer = document.getElementById('galleryContainer');
-    const clearGalleryBtn = document.getElementById('clearGallery');
-    const mockupToggle = document.getElementById('mockupToggle');
-    const trainUpload = document.getElementById('trainImagesUpload');
-    const trainPreviewDiv = document.getElementById('trainPreview');
-    const trainModelBtn = document.getElementById('trainModelBtn');
-    const trainStatus = document.getElementById('trainStatus');
-    const styleNameInput = document.getElementById('styleName');
-    const activeStyleBadge = document.getElementById('activeStyleBadge');
-    const promptPreviewSpan = document.getElementById('promptPreview');
+    // DOM elements
+    const tokenInput = document.getElementById('hfToken');
+    const saveTokenBtn = document.getElementById('saveTokenBtn');
+    const styleBtns = document.querySelectorAll('.style-btn');
+    const generateBtn = document.getElementById('generateImageBtn');
+    const genLoader = document.getElementById('genLoader');
+    const genError = document.getElementById('genError');
+    const galleryDiv = document.getElementById('gallery');
+    const clearGalleryBtn = document.getElementById('clearGalleryBtn');
+    const mockupCheck = document.getElementById('mockupMode');
+    const trainInput = document.getElementById('trainInput');
+    const trainPreviewArea = document.getElementById('trainPreviewArea');
+    const customStyleNameInput = document.getElementById('customStyleName');
+    const trainStyleBtn = document.getElementById('trainStyleBtn');
+    const trainStatusDisplay = document.getElementById('trainStatusDisplay');
+    const trainedBadge = document.getElementById('trainedBadge');
+    const promptPreviewLive = document.getElementById('promptPreviewLive');
     
-    // carga token desde localStorage opcional
-    if(localStorage.getItem('hf_token')) hfTokenInput.value = localStorage.getItem('hf_token');
-    hfTokenInput.addEventListener('change', () => localStorage.setItem('hf_token', hfTokenInput.value));
+    if(hfToken) tokenInput.value = hfToken;
     
-    // Estilos interactivos
-    document.querySelectorAll('.style-btn').forEach(btn => {
+    saveTokenBtn.addEventListener('click', () => {
+        hfToken = tokenInput.value.trim();
+        localStorage.setItem("hf_token", hfToken);
+        document.getElementById('tokenMsg').innerHTML = "✅ Token almacenado (cárnico)";
+        setTimeout(()=> document.getElementById('tokenMsg').innerHTML="", 2000);
+    });
+    
+    // Estilos
+    styleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedStyle = btn.dataset.style;
+            styleBtns.forEach(b => b.classList.remove('active-style'));
+            btn.classList.add('active-style');
+            activeStyle = btn.dataset.style;
             updatePromptPreview();
         });
     });
+    
+    function getStyleDescriptor(style) {
+        const map = {
+            anime: "anime tattoo, vibrant inks, cel-shaded, manga screentone, kawaii but dark, dynamic action lines",
+            tribal: "tribal blackwork, polynesian-maori fusion, sharp pointed arcs, aggressive patterns, dark symmetry",
+            gore: "gore tattoo, visceral meat, exposed flesh, blood splatter, biomechanical entrails, splatterpunk",
+            cybersigil: "cyber sigils, neon ritual symbols, cyberpunk tribal, encrypted runes, glitch circuits, bio-digital",
+            neotribal: "neo tribal, futuristic geometry, organic techno ornaments, 3D relief, alien biomechanics"
+        };
+        return map[style] || "dark fantasy tattoo";
+    }
+    
+    // Construir prompt final + modificación de entrenamiento
+    function buildUltimatePrompt() {
+        let baseDesc = getStyleDescriptor(activeStyle);
+        let meatGigerCore = "meatcore aesthetic, HR Giger biomechanical, blood red, Mortal Kombat fatalities atmosphere, body horror, flesh metal, spikes, skull motifs, chains, high detailed tattoo design, flash art, sharp lines, dark red and black.";
+        let trainedInjection = trainedActive ? ` || ESTILO ENTRENADO: ${trainedName} -> INFLUENCIA VISUAL: ${trainedPromptAddon} || ` : "";
+        let prompt = `Tattoo design, ${baseDesc}, ${meatGigerCore}, ${trainedInjection} ultra detailed, 8k, intricate, symmetrical, album cover art, dark ritual.`;
+        let negative = "worst quality, lowres, watermark, text, ugly, deformed, blurry, smooth, boring, plain background, cartoonish, 3d render";
+        return { prompt: prompt.substring(0, 800), negative };
+    }
     
     function updatePromptPreview() {
-        let styleDesc = getStyleDescriptor(selectedStyle);
-        let customSuffix = trainedActive ? `   🔥 ESTILO ENTRENADO: ${trainedStyleName} → INFLUENCIA CARNAL: ${trainedPromptModifier.substring(0, 80)}` : "";
-        let full = `🩸[MEATCORE + GIGER + MORTAL KOMBAT] 🩸 | Estilo base: ${styleDesc} | +elements blood, flesh, biomechanics + ${customSuffix}`;
-        promptPreviewSpan.innerText = full.substring(0, 280);
+        let { prompt } = buildUltimatePrompt();
+        promptPreviewLive.innerHTML = `<i class="fas fa-fire"></i> ${prompt.substring(0, 280)}...`;
     }
     
-    function getStyleDescriptor(styleKey) {
-        const map = {
-            anime: "anime tattoo art, vibrant colors, cel shading, dynamic pose, manga lineart, kawaii but gore, cyberpunk blood",
-            tribal: "tribal pattern, bold blackwork, maori influence, sharp aggressive spikes, fluid curves, dark ritual",
-            gore: "gore tattoo, anatomical horror, exposed muscle, blood dripping, splatter art, meatcore visceral, entrails",
-            cybersigil: "cyber sigils, glowing neon runes, circuit board curves, darknet glyphs, holographic edge, death tech tribal",
-            neotribal: "neo tribal futuristic, biomechanical flow, geometric lines, organic-metal fusion, 3D illusions, alien patterns"
-        };
-        return map[styleKey] || "anime dark fantasy tattoo";
-    }
-    
-    // ---- SIMULACIÓN DE ENTRENAMIENTO (inyección semántica basada en imágenes subidas) ----
-    trainUpload.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
-        uploadedImageData = [];
-        trainPreviewDiv.innerHTML = '';
-        files.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                const img = document.createElement('img');
-                img.src = ev.target.result;
-                img.classList.add('train-thumb');
-                trainPreviewDiv.appendChild(img);
-                uploadedImageData.push(ev.target.result);
-            };
-            reader.readAsDataURL(file);
-        });
-        if(files.length === 0) trainStatus.innerText = "🩸 Sube tatuajes para entrenar estilo único";
-        else trainStatus.innerText = `✅ ${files.length} imágenes cargadas. Listas para el altar del entrenamiento.`;
-    });
-    
-    trainModelBtn.addEventListener('click', () => {
-        if(uploadedImageData.length < 2) {
-            trainStatus.innerText = "❌ Necronomicón requiere al menos 2 imágenes de referencia de tatuajes / flash";
-            return;
-        }
-        let styleCustomName = styleNameInput.value.trim();
-        if(styleCustomName === "") styleCustomName = "BLOOD CUSTOM";
-        trainStatus.innerHTML = "<div class='loader' style='width:25px; height:25px;'></div> Entrenando carne sintiente... amalgamando estilos...";
-        // simulamos proceso de entrenamiento (extraer colores + generalizar concepto)
-        setTimeout(() => {
-            // Creamos un "modificador entrenado" que combina análisis simbólico
-            let keywords = ["biomeat", "gigeresque", "red sacrifice", "tribal mutation", "cyber nerve", "neo ritual"];
-            let randomMix = keywords.sort(() => 0.5 - Math.random()).slice(0,3).join(" ");
-            trainedPromptModifier = `ESTILO ENTRENADO (${styleCustomName}): influencias de tus ${uploadedImageData.length} diseños fusionados → ${randomMix}, texturas orgánicas, simbología única de tatuajes, líneas africanas-cyberpunk, meatcore intensidad.`;
-            trainedActive = true;
-            trainedStyleName = styleCustomName;
-            activeStyleBadge.style.display = "block";
-            activeStyleBadge.innerHTML = `<i class="fas fa-drumstick-bite"></i> MODELO ACTIVO: ${trainedStyleName} | La IA ahora incluirá tu esencia personal.`;
-            trainStatus.innerHTML = `🔥 ENTRENAMIENTO COMPLETO 🔥 El modelo ha asimilado ${uploadedImageData.length} imágenes. Estilo "${styleCustomName}" inyectado en generaciones futuras.`;
-            updatePromptPreview();
-        }, 1800);
-    });
-    
-    // Función para construir prompt final con inferencia propia
-    function buildFinalPrompt() {
-        let baseStyleDesc = getStyleDescriptor(selectedStyle);
-        let meatGigerBase = "meatcore aesthetic, HR Giger biomechanical horror, red blood splatters, Mortal Kombat atmosphere, dark ritual tattoo, fleshy metal, spikes, skulls, high detail, sharp lines, flash design, mockup tattoo ready.";
-        let trainInjection = trainedActive ? trainedPromptModifier + " " : "";
-        let customPrompt = `Tattoo design, unique flash art, ${baseStyleDesc}, ${meatGigerBase}, ${trainInjection} ultra detailed, 8K, intricate patterns, bloody accents, crimson and black, dark fantasy.`;
-        // negativos
-        let negative = "worst quality, lowres, watermark, text, deformed, ugly, blurry, smooth skin, bad anatomy, boring";
-        return { prompt: customPrompt.substring(0, 750), negative };
-    }
-    
-    // Función para llamar a Hugging Face Inference API (SD v1.5)
-    async function generateImageFromHF(prompt, negativePrompt) {
-        const token = hfTokenInput.value.trim();
-        if(!token) {
-            throw new Error("⚠️ Token de HuggingFace requerido. Obtén uno gratis en huggingface.co/settings/tokens");
-        }
-        const model = "stabilityai/stable-diffusion-2-1"; // mejor balance o runwayml/stable-diffusion-v1-5
-        const payload = {
-            inputs: prompt,
-            parameters: {
-                negative_prompt: negativePrompt,
-                num_inference_steps: 28,
-                guidance_scale: 7.5,
-                width: 512,
-                height: 512
-            }
-        };
+    // ----- GENERACIÓN REAL CON HUGGING FACE (SD) -----
+    async function generateTattooImage(prompt, negative) {
+        if(!hfToken) throw new Error("🔴 Token de Hugging Face requerido. Ingrésalo y guarda.");
+        const model = "stabilityai/stable-diffusion-2-1";
         const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
+            headers: { "Authorization": `Bearer ${hfToken}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                inputs: prompt,
+                parameters: { negative_prompt: negative, num_inference_steps: 30, guidance_scale: 8, width: 512, height: 512 }
+            })
         });
         if(!response.ok) {
-            let errorMsg = await response.text();
-            throw new Error(`HF API error ${response.status}: ${errorMsg.substring(0, 150)}`);
+            let errText = await response.text();
+            throw new Error(`HF error ${response.status}: ${errText.slice(0,120)}`);
         }
         const blob = await response.blob();
         return URL.createObjectURL(blob);
     }
     
-    // Mockup overlay (simula colocación en brazo / piel metálica)
-    async function applyMockupEffect(imageUrl) {
-        return ne
+    // efector mockup: simular tatuaje sobre piel metálica giger
+    async function mockupEffect(imageUrl) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 512; canvas.height = 512;
+                const ctx = canvas.getContext('2d');
+                // fondo textura carne oscura
+                ctx.fillStyle = "#8f5e45";
+                ctx.fillRect(0,0,512,512);
+                // textura rugosa
+                for(let i=0;i<500;i++) {
+                    ctx.fillStyle = `rgba(70,25,15,${Math.random()*0.5})`;
+                    ctx.fillRect(Math.random()*512, Math.random()*512, 3, 3);
+                }
+                // añadir venas
+                ctx.strokeStyle = "#a03322";
+                ctx.lineWidth = 4;
+                for(let v=0;v<30;v++) {
+                    ctx.beginPath();
+                    ctx.moveTo(Math.random()*512, Math.random()*512);
+                    ctx.lineTo(Math.random()*512, Math.random()*512);
+                    ctx.stroke();
+                }
+                // superponer tatuaje modo multiplicar
+                ctx.globalCompositeOperation = "multiply";
+                ctx.drawImage(img, 40, 70, 432, 380);
+                ctx.globalCompositeOperation = "source-over";
+                // bordes biomecánicos con remaches
+                ctx.strokeStyle = "#be3420";
+                ctx.lineWidth = 14;
+                ctx.strokeRect(20, 50, 472, 420);
+                for(let r=0;r<12;r++) {
+                    ctx.fillStyle = "#c04228";
+                    ctx.beginPath();
+                    ctx.arc(35 + r*40, 70, 8, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.fillStyle = "#6a1a0c";
+                    ctx.beginPath();
+                    ctx.arc(35 + r*40, 70, 3, 0, Math.PI*2);
+                    ctx.fill();
+                }
+                canvas.toBlob(blob => resolve(URL.createObjectURL(blob)));
+            };
+            img.src = imageUrl;
+        });
+    }
+    
+    function addImageToGallery(imageUrl) {
+        if(galleryDiv.children.length === 1 && galleryDiv.children[0].innerText.includes("Las invocaciones")) galleryDiv.innerHTML = '';
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        const delBtn = document.createElement('button');
+        delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+        delBtn.style.margin = "8px auto";
+        delBtn.style.display = "block";
+        delBtn.style.padding = "5px";
+        delBtn.onclick = () => item.remove();
+        item.appendChild(img);
+        item.appendChild(delBtn);
+        galleryDiv.prepend(item);
+    }
+    
+    generateBtn.addEventListener('click', async () => {
+        genLoader.style.display = "block";
+        genError.innerText = "";
+        try {
+            const { prompt, negative } = buildUltimatePrompt();
+            console.log("Prompt:", prompt);
+            let rawImgUrl = await generateTattooImage(prompt, negative);
+            let finalUrl = rawImgUrl;
+            if(mockupCheck.checked) {
+                finalUrl = await mockupEffect(rawImgUrl);
+                URL.revokeObjectURL(rawImgUrl);
+            }
+            addImageToGallery(finalUrl);
+        } catch(err) {
+            genError.innerText = "
